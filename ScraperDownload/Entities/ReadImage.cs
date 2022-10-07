@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Text.RegularExpressions;
 using Tesseract;
 
 
@@ -54,5 +55,29 @@ namespace ScraperDownload.Entities
                 }
             }
         }
+        public string FilterText(string text)
+        {
+            string result;
+            string line;
+            var matchesValue = new Regex(@"(\d+\.\d{2})");
+            var resultList = new List<string>();
+
+            using( var sr = new StringReader(text))
+            {
+                while ((line = sr.ReadLine()) != null)
+                {
+                    var value = matchesValue.Match(line);   
+                    if (value.Success)
+                    {
+                        result = value.Groups[0].Value;
+                        return result;
+                    }
+                }
+
+            }
+            return "Fail";
+            
+        }
     }
 }
+

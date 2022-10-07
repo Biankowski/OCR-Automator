@@ -34,7 +34,8 @@ namespace ScraperDownload
 
             ReadImage readImage = new ReadImage(new TesseractEngine(tessDataPath, tessDataLanguage, EngineMode.Default));
             string result = readImage.ReadImageFromUser(imagePath, "\\" + txtB_FileName.Text + ".png");
-            MessageBox.Show(result);
+            var filteredText = readImage.FilterText(result);
+            MessageBox.Show(filteredText);
         }
     }
 }

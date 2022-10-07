@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Downloader));
             this.txtB_Url = new System.Windows.Forms.TextBox();
             this.lbl_UrlLabel = new System.Windows.Forms.Label();
             this.btn_Download = new System.Windows.Forms.Button();
@@ -99,6 +100,7 @@
             this.Controls.Add(this.btn_Download);
             this.Controls.Add(this.lbl_UrlLabel);
             this.Controls.Add(this.txtB_Url);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Frm_Downloader";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Downloader";
