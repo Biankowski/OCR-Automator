@@ -59,7 +59,7 @@ namespace ScraperDownload.Entities
         {
             string result;
             string line;
-            var matchesValue = new Regex(@"(\$((\d+)[.,](\d+)[.,](\d+)))");
+            var matchesValue = new Regex(@"(\$((\d*)[.,](\d*)[.,]*(\d*)))");
             var resultList = new List<string>();
 
             using( var sr = new StringReader(text))
