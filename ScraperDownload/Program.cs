@@ -1,3 +1,5 @@
+using Automator;
+
 namespace ScraperDownload
 {
     internal static class Program
@@ -11,7 +13,7 @@ namespace ScraperDownload
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Frm_Downloader());
+            Application.Run(new Connect());
         }
     }
 }

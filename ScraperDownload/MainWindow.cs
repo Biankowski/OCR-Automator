@@ -28,14 +28,15 @@ namespace ScraperDownload
 
         private void btn_GetInfo_Click(object sender, EventArgs e)
         {
-            string tessDataPath = @"C:\Program Files\Tesseract-OCR\tessdata";
+            string tessDataPath = @"C:\Users\rodri\tesseract\tessdata";
             string tessDataLanguage = "eng";
             string imagePath = Directory.GetCurrentDirectory() + "\\Images";
 
             ReadImage readImage = new ReadImage(new TesseractEngine(tessDataPath, tessDataLanguage, EngineMode.Default));
             string result = readImage.ReadImageFromUser(imagePath, "\\" + txtB_FileName.Text + ".png");
             var filteredText = readImage.FilterText(result);
-            MessageBox.Show(filteredText);
+            MessageBox.Show(filteredText, txtB_Url.Text);
+            
         }
     }
 }

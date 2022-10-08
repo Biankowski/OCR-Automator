@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "controle-financeiro-341518",
+  "private_key_id": "4219150e771ea9af9c96724cdb07c5703996f755",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDLrKtZO4RVj7dC\nrESLkhtQdm5B7x74B5/uMBbNvt+3XyyjdVYRbogAcWqR8FG3eu+xNnBzQ/vmKk8i\n9xvtnHBTcpVwedwk5hFG1D71fCJZUvtXZPcZ6hSQqzhRdYa1KYu2MnHdV0lPIH5y\nNJ9klFRbFrgUEIj1F6MDyzwT4MNnTJlQuUF5CdcsplTg0xL9qqYcjYPVliO/EdBk\nuRwq6lXze1BuY+gL8TZiI5BmIsG1XSscI5P4bOQWkWijrLQsPbsC2HZ0LTWQ7N6d\n2avN8fnFhRzcA2jPN47Q00661eyKr2MJRL5113HUxS1FdSCP3Ic+yTeanEQbkgv+\nLd5A0bUvAgMBAAECggEAIMJ1+w/Ld2xQHd1nLGCEm9q4svU7Bh+f1egOkEBOa92s\nkza5GxZWsg+MBHY4MUAI/qLSz89psbnbabR/svvHG2eiPr7zAvetuWFD0Si1aP2j\nvLOvhQ+1XWw/eOa46I8KpZ8T2SCu2MHRZMgvB7ajTNVo0p1dkg0fuhP95p/v02o2\njNzhHt5T/rzGFITmbSGPF2BxTx8j66gdQry2Jm1Z04sG6Jg7NGx+1KxFcAlFtN26\nnzDRWX4hH4SVAVz7/+RUx0xa9lvbf4npUnPcU6MeLF7p6GOSe6LT2plO3PUyZXDG\nXw/fHVDczDtg25B42AVSDAK6Cj2RdtqjWeEdxCyFhQKBgQDzS+vi5xe7eN8G4ksm\nAdLI95GyI4/t0P/SiTfz4u5/BB3PXgAI8wNvXGV/51eBatz99D77qcpaBNdaztJC\nboR+0j86doti3jU+7KOhagZb3frN7GGSlI5IaaROVV1qtBm6f+8Ep68dZZeMKeF7\nqMJFvlJG5mVKiWjI8VJMHXiVcwKBgQDWTyFj725OAzsbh4wqNydEzTXL+48D5vhL\nl3LOpbLGGoEbtF0wjlqEy5FJdUblZOzVyjM2AMusKbARZx1JOS4gVsv6I4nXHdkQ\niQBqOdat0/z2b38/u8TQtk13AnG18ai3DyrsBQUC9Rf22pzLRCtrkZ2nj2ctVn8p\n5uRMTCISVQKBgEGuxH8cfna5WhTEsR8QrPReifH60deVbgtLylRIdrTJyrZ6HS5N\nVScSXcCbFy+0Rvc0onBU1XFaDz3PyknvBkwqvLEu4dCORve28TIZqp/QnO5NG8Zz\n3rnD83zGZRLyjmOgOEocbxVToQdRIzO8Sr6DdDj56GyoDib5p4svBafrAoGBAMxZ\nOdKL7NcQd50Be+KJIrWVI1X08eLbqyiRKdTn5PbHMRLUwgNZyfBUF54+6LI1sSsO\nGhTFX3AzdAK0GxXGIziM6wUCPB5WBLOinzWrHwwzVkM5/9Eq3znQiz8OopTF8IVV\nPi09gBDY2df1joq33ts8R2MN92kg0DKJSmmCMv7dAoGAamj9FbUsVUoCiYpyrvlK\nyCWoqqHW+OEiil4DO6dIReLorGPTYYK88aWyfV5YX4gFeUqXtyU8OhN4S9kirD1l\nzjr56n3mheva5GB2kvM6I6g56msSq8e5AKKFiqI5F4iNwgOB3Om6KnaS5FhXHiu5\nWpGX4Q4YeJpzOOKKpC4lITo=\n-----END PRIVATE KEY-----\n",
+  "client_email": "automator@controle-financeiro-341518.iam.gserviceaccount.com",
+  "client_id": "109117111348479195718",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/automator%40controle-financeiro-341518.iam.gserviceaccount.com"
+}
