@@ -1,5 +1,6 @@
 ﻿using Google.Apis.Auth.OAuth2;
 using Google.Apis.Sheets.v4;
+using Google.Apis.Sheets.v4.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,9 @@ namespace Automator.Entities
     {
         static readonly string[] Scopes = { SheetsService.Scope.Spreadsheets };
         static readonly string ApplicationName = "Automator";
-        static readonly string name = "Tester";
+        static readonly string name = "Automator";
+        static readonly string sheet = "Tester";
+        public static string spreadsheetId;
         static SheetsService service;
 
         public static bool Connect(string configurationFile)
@@ -22,7 +25,7 @@ namespace Automator.Entities
 
             try
             {
-                using(var stream = new FileStream(configurationFile + ".json", FileMode.Open, FileAccess.Read))
+                using(var stream = new FileStream(configurationFile, FileMode.Open, FileAccess.Read))
                 {
                     credential = GoogleCredential.FromStream(stream).CreateScoped(Scopes);
                 }
@@ -37,6 +40,18 @@ namespace Automator.Entities
             {
                 return false;
             }
+        }
+        public static void CreateEntry(List<object> result)
+        {
+            var range = $"{sheet}!A:C";
+            var valueRange = new ValueRange();
+
+            var objectList = result.ToList();
+            valueRange.Values = new List<IList<object>> { objectList };
+
+            var appendRequest = service.Spreadsheets.Values.Append(valueRange, spreadsheetId, range);
+            appendRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
+            var appendResponse = appendRequest.Execute();
         }
     }
 }

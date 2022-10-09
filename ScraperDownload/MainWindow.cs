@@ -1,4 +1,5 @@
 using AltoHttp;
+using Automator.Entities;
 using ScraperDownload.Entities;
 using Tesseract;
 
@@ -23,6 +24,8 @@ namespace ScraperDownload
             }
             httpDownloader = new HttpDownloader(imageUrl, $"{imagePath}\\{Path.GetFileName(txtB_FileName.Text + ".png")}");
             httpDownloader.Start();
+            Thread.Sleep(2 * 1000);
+            MessageBox.Show("Download Compleated!");
 
         }
 
@@ -35,7 +38,8 @@ namespace ScraperDownload
             ReadImage readImage = new ReadImage(new TesseractEngine(tessDataPath, tessDataLanguage, EngineMode.Default));
             string result = readImage.ReadImageFromUser(imagePath, "\\" + txtB_FileName.Text + ".png");
             var filteredText = readImage.FilterText(result);
-            MessageBox.Show(filteredText, txtB_Url.Text);
+            SheetConnector.CreateEntry(filteredText);
+            MessageBox.Show("Done");
             
         }
     }

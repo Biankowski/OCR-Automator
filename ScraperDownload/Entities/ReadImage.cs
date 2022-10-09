@@ -55,12 +55,12 @@ namespace ScraperDownload.Entities
                 }
             }
         }
-        public string FilterText(string text)
+        public List<object> FilterText(string text)
         {
             string result;
             string line;
             var matchesValue = new Regex(@"(\$((\d*)[.,]*(\d*)[.,]*(\d*)))");
-            var resultList = new List<string>();
+            var resultList = new List<object>();
 
             using( var sr = new StringReader(text))
             {
@@ -70,11 +70,11 @@ namespace ScraperDownload.Entities
                     if (value.Success)
                     {
                         result = value.Groups[0].Value;
-                        return result;
+                        resultList.Add(result);
                     }
                 }
             }
-            return "Fail";
+            return resultList;
         }
     }
 }
