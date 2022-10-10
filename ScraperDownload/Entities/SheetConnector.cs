@@ -1,11 +1,6 @@
 ﻿using Google.Apis.Auth.OAuth2;
 using Google.Apis.Sheets.v4;
 using Google.Apis.Sheets.v4.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace Automator.Entities
@@ -22,7 +17,6 @@ namespace Automator.Entities
         public static bool Connect(string configurationFile)
         {
             GoogleCredential credential;
-
             try
             {
                 using(var stream = new FileStream(configurationFile, FileMode.Open, FileAccess.Read))
@@ -43,7 +37,7 @@ namespace Automator.Entities
         }
         public static void CreateEntry(List<object> result)
         {
-            var range = $"{sheet}!A:C";
+            var range = $"{sheet}!A27:C";
             var valueRange = new ValueRange();
 
             var objectList = result.ToList();

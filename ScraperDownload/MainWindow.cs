@@ -26,9 +26,7 @@ namespace ScraperDownload
             httpDownloader.Start();
             Thread.Sleep(2 * 1000);
             MessageBox.Show("Download Compleated!");
-
         }
-
         private void btn_GetInfo_Click(object sender, EventArgs e)
         {
             string tessDataPath = @"C:\Users\rodri\tesseract\tessdata";
@@ -40,7 +38,6 @@ namespace ScraperDownload
             var filteredText = readImage.FilterText(result);
             SheetConnector.CreateEntry(filteredText);
             MessageBox.Show("Done");
-            
         }
     }
 }

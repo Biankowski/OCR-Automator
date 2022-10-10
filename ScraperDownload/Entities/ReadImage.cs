@@ -15,7 +15,6 @@ namespace ScraperDownload.Entities
         public string ReadImageFromUser(string imagePath, string fileName)
         {
             string fullPath = imagePath + fileName;
-           
             try
             {
                 using (var image = Pix.LoadFromFile(fullPath))
@@ -37,7 +36,6 @@ namespace ScraperDownload.Entities
             {
                 return "not found";
             }
-            
         }
         public void InvertImage(Bitmap image)
         {
@@ -62,7 +60,7 @@ namespace ScraperDownload.Entities
             var matchesValue = new Regex(@"(\$((\d*)[.,]*(\d*)[.,]*(\d*)))");
             var resultList = new List<object>();
 
-            using( var sr = new StringReader(text))
+            using(var sr = new StringReader(text))
             {
                 while ((line = sr.ReadLine()) != null)
                 {
