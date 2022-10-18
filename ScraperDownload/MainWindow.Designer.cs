@@ -35,6 +35,7 @@
             this.lbl_FileName = new System.Windows.Forms.Label();
             this.txtB_FileName = new System.Windows.Forms.TextBox();
             this.btn_GetInfo = new System.Windows.Forms.Button();
+            this.DatePicker = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // txtB_Url
@@ -89,11 +90,21 @@
             this.btn_GetInfo.UseVisualStyleBackColor = true;
             this.btn_GetInfo.Click += new System.EventHandler(this.btn_GetInfo_Click);
             // 
+            // DatePicker
+            // 
+            this.DatePicker.CustomFormat = "dd/MM/yyyy";
+            this.DatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DatePicker.Location = new System.Drawing.Point(79, 3);
+            this.DatePicker.Name = "DatePicker";
+            this.DatePicker.Size = new System.Drawing.Size(104, 23);
+            this.DatePicker.TabIndex = 6;
+            // 
             // Frm_Downloader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(452, 284);
+            this.Controls.Add(this.DatePicker);
             this.Controls.Add(this.btn_GetInfo);
             this.Controls.Add(this.txtB_FileName);
             this.Controls.Add(this.lbl_FileName);
@@ -117,5 +128,6 @@
         private Label lbl_FileName;
         private TextBox txtB_FileName;
         private Button btn_GetInfo;
+        private DateTimePicker DatePicker;
     }
 }

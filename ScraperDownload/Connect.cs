@@ -25,7 +25,10 @@ namespace Automator
             {
                 txtB_SpreadsheetId.Text = Properties.Settings.Default.SpreadSheetId;
             }
-            chkB_RememberConfigFile.Checked = Enabled;
+            if(Properties.Settings.Default.ConfigurationFile != string.Empty && Properties.Settings.Default.SpreadSheetId != string.Empty)
+            {
+                chkB_RememberConfigFile.Checked = Enabled;
+            }
         }
         private void btn_Connect_Click(object sender, EventArgs e)
         {
@@ -42,10 +45,17 @@ namespace Automator
         }
         private void btn_OpenFile_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFile = new OpenFileDialog();
-            openFile.ShowDialog();
-            FileInfo fileInfo = new FileInfo(openFile.FileName);
-            txtB_ConfigurationFileName.Text = fileInfo.Name;
+            try
+            {
+                OpenFileDialog openFile = new OpenFileDialog();
+                openFile.ShowDialog();
+                FileInfo fileInfo = new FileInfo(openFile.FileName);
+                txtB_ConfigurationFileName.Text = fileInfo.Name;
+            }
+            catch (Exception)
+            {
+            }
+            
         }
         private void chkB_RememberConfigFile_CheckedChanged(object sender, EventArgs e)
         {
