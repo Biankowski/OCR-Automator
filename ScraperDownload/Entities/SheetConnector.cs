@@ -65,25 +65,19 @@ namespace Automator.Entities
             }
             return 0;
         }
-        public static void CreateEntry(List<object> result, int index)
+        public static void CreateEntry(List<object> result, int sheetIndex, string sheetRange)
         {
-            var range1 = $"{sheet}!C{index}";
-            //var range2 = $"{sheet}!B17";
+            var range = $"{sheet}!{sheetRange}{sheetIndex}";
             var valueRange = new ValueRange();
 
             var objectList1 = result.ToList();
-            var objectList2 = result.ToList();
             valueRange.Values = new List<IList<object>> { objectList1 };
-            //valueRange.Values = new List<IList<object>> { objectList2 };
 
-            var appendRequest1 = service.Spreadsheets.Values.Append(valueRange, spreadsheetId, range1);
-           // var appendRequest2 = service.Spreadsheets.Values.Append(valueRange, spreadsheetId, range2);
+            var appendRequest1 = service.Spreadsheets.Values.Append(valueRange, spreadsheetId, range);
 
             appendRequest1.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
-            //appendRequest2.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
 
-            var appendResponse1 = appendRequest1.Execute();
-            //var appendResponse2 = appendRequest2.Execute();
+            appendRequest1.Execute();
         }
     }
 }

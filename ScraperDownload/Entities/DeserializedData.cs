@@ -15,11 +15,5 @@ namespace Automator.Entities
         public List<List<string>> values { get; set; }
         public object ETag { get; set; }
     }
-    
+
 }
-
-
-
-
-
-

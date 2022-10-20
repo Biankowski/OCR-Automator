@@ -12,38 +12,90 @@ namespace ScraperDownload
             InitializeComponent();
         }
 
+        private const string POKERSTARS_SCREENSHOT_BANKROLL_SHEET_RANGE = "B";
+        private const string BODOG_SCREENSHOT_BANKROLL_SHEET_RANGE = "D";
         HttpDownloader httpDownloader;
-        private void btn_Download_Click(object sender, EventArgs e)
+        private void btn_PokerStarsDownload_Click(object sender, EventArgs e)
         {
-            string imageUrl = txtB_Url.Text + ".png";
-            string imagePath = Directory.GetCurrentDirectory() + "\\Images";
-
-            if (!Directory.Exists(Path.Combine(imagePath)))
+            //Try catch not working(19/10/2022)
+            try
             {
-                Directory.CreateDirectory(Path.Combine(imagePath));
+                string pokerStarsScreenShot = txtB_PokerStarsScreenShot.Text + ".png";
+                string imagePath = Directory.GetCurrentDirectory() + "\\PokerstarsScreenShot";
+
+                if (!Directory.Exists(Path.Combine(imagePath)))
+                {
+                    Directory.CreateDirectory(Path.Combine(imagePath));
+                }
+                httpDownloader = new HttpDownloader(pokerStarsScreenShot, $"{imagePath}\\{Path.GetFileName("pokerstars" + ".png")}");
+                httpDownloader.Start();
+                Thread.Sleep(2 * 1000);
+                MessageBox.Show("Got PokerStars Info!");
             }
-            httpDownloader = new HttpDownloader(imageUrl, $"{imagePath}\\{Path.GetFileName(txtB_FileName.Text + ".png")}");
-            httpDownloader.Start();
-            Thread.Sleep(2 * 1000);
-            MessageBox.Show("Download Compleated!");
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show("Error.");
+            }
+            
         }
         private void btn_GetInfo_Click(object sender, EventArgs e)
         {
             string tessDataPath = @"C:\Program Files\Tesseract-OCR\tessdata";
             string tessDataLanguage = "eng";
-            string imagePath = Directory.GetCurrentDirectory() + "\\Images";
-
-            ReadImage readImage = new ReadImage(new TesseractEngine(tessDataPath, tessDataLanguage, EngineMode.Default));
-            string result = readImage.ReadImageFromUser(imagePath, "\\" + txtB_FileName.Text + ".png");
-            var filteredText = readImage.FilterText(result);
-            //SheetConnector.CreateEntry(filteredText);
             int index = SheetConnector.GetValuesFromSheet(DateOnly.FromDateTime(DatePicker.Value));
-            SheetConnector.CreateEntry(filteredText, index);
 
+            if (Directory.Exists(Path.Combine(Directory.GetCurrentDirectory() + "\\PokerstarsScreenShot")))
+            {
+                string pokerStarsImagePath = Directory.GetCurrentDirectory() + "\\PokerstarsScreenShot";
+                ReadImage readImage = new ReadImage(new TesseractEngine(tessDataPath, tessDataLanguage, EngineMode.Default));
+                if(rB_PokerStarsScreenshotBGColorDark.Checked == true)
+                {
+                    string pokerStarsResult = readImage.ReadImageFromUser(pokerStarsImagePath, "pokerstars" + ".png", true);
+                    var pokerstarsFiltetedText = readImage.FilterText(pokerStarsResult);
+                    SheetConnector.CreateEntry(pokerstarsFiltetedText, index, POKERSTARS_SCREENSHOT_BANKROLL_SHEET_RANGE);
+                }
+                else
+                {
+                    string pokerStarsResult = readImage.ReadImageFromUser(pokerStarsImagePath, "pokerstars" + ".png", false);
+                    var pokerstarsFiltetedText = readImage.FilterText(pokerStarsResult);
+                    SheetConnector.CreateEntry(pokerstarsFiltetedText, index, POKERSTARS_SCREENSHOT_BANKROLL_SHEET_RANGE);
+                }
+                
+            }
+            if (Directory.Exists(Path.Combine(Directory.GetCurrentDirectory() + "\\BodogScreenShot")))
+            {
+                string bodogImagePath = Directory.GetCurrentDirectory() + "\\BodogScreenShot";
+                ReadImage readImage = new ReadImage(new TesseractEngine(tessDataPath, tessDataLanguage, EngineMode.Default));
+                if(rB_BodogScreenShotBGColorDark.Checked == true)
+                {
+                    string bodogResult = readImage.ReadImageFromUser(bodogImagePath, "bodog" + ".png", true);
+                    var bodogFiltetedText = readImage.FilterText(bodogResult);
+                    SheetConnector.CreateEntry(bodogFiltetedText, index, BODOG_SCREENSHOT_BANKROLL_SHEET_RANGE);
+                }
+                else
+                {
+                    string bodogResult = readImage.ReadImageFromUser(bodogImagePath, "bodog" + ".png", false);
+                    var bodogFiltetedText = readImage.FilterText(bodogResult);
+                    SheetConnector.CreateEntry(bodogFiltetedText, index, BODOG_SCREENSHOT_BANKROLL_SHEET_RANGE);
+                }
+                
+            }
 
-            //MessageBox.Show(result);
-            
-           
         }
+        private void btn_BodogDownload_Click(object sender, EventArgs e)
+        {
+            
+            string bodogScreenShot = txtB_BodogScreenShot.Text + ".png";
+            string imagePath = Directory.GetCurrentDirectory() + "\\BodogScreenShot";
+
+            if (!Directory.Exists(Path.Combine(imagePath)))
+            {
+                Directory.CreateDirectory(Path.Combine(imagePath));
+            }
+            httpDownloader = new HttpDownloader(bodogScreenShot, $"{imagePath}\\{Path.GetFileName("bodog" + ".png")}");
+            httpDownloader.Start();
+            Thread.Sleep(2 * 1000);
+            MessageBox.Show("Got Bodog Info!");
+        }    
     }
 }

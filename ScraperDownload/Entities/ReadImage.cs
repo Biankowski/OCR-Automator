@@ -12,21 +12,21 @@ namespace ScraperDownload.Entities
         {
             _engine = engine;
         }
-        public string ReadImageFromUser(string imagePath, string fileName)
+        public string ReadImageFromUser(string imagePath, string fileName, bool backGroundColorDark)
         {
-            string fullPath = imagePath + fileName;
             try
             {
-                using (var image = Pix.LoadFromFile(fullPath))
+                using (var image = Pix.LoadFromFile(imagePath + "\\" + fileName))
                 {
                     var bitImage = PixConverter.ToBitmap(image);
-                    InvertImage(bitImage);
+                    if(backGroundColorDark == true) InvertImage(bitImage);
+
                     var pixConveterd = PixConverter.ToPix(bitImage);
 
                     using (var page = _engine.Process(pixConveterd))
                     {
                         var text = page.GetText();
-                        Directory.Delete(Directory.GetCurrentDirectory() + "\\Images", true);
+                        Directory.Delete(imagePath, true);
 
                         return text;
                     }
@@ -37,7 +37,8 @@ namespace ScraperDownload.Entities
                 return "not found";
             }
         }
-        public void InvertImage(Bitmap image)
+
+        private void InvertImage(Bitmap image)
         {
             for (int i = 0; i < image.Width; i++)
             {
