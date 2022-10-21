@@ -54,7 +54,7 @@ namespace ScraperDownload.Entities
                 }
             }
         }
-        public List<object> FilterText(string text)
+        public List<object> FilterText(string text, string imageURL)
         {
             string result;
             string line;
@@ -69,10 +69,14 @@ namespace ScraperDownload.Entities
                     if (value.Success)
                     {
                         result = value.Groups[0].Value;
+                        result = result.Replace("$", "");
+                        result = result.Replace(",", "");
+                        result = result.Replace(".", ",");
                         resultList.Add(result);
                     }
                 }
             }
+            resultList.Add(imageURL);
             return resultList;
         }
     }

@@ -2,6 +2,7 @@
 using Google.Apis.Sheets.v4;
 using Google.Apis.Sheets.v4.Data;
 using Newtonsoft.Json;
+using System;
 using System.Collections;
 using static Google.Apis.Sheets.v4.SpreadsheetsResource.ValuesResource;
 
@@ -65,19 +66,34 @@ namespace Automator.Entities
             }
             return 0;
         }
-        public static void CreateEntry(List<object> result, int sheetIndex, string sheetRange)
+        public static void CreateEntry(List<object> result, int sheetIndex, string sheetRange, string urlRange)
         {
-            var range = $"{sheet}!{sheetRange}{sheetIndex}";
-            var valueRange = new ValueRange();
+            var imageBankrollRange = $"{sheet}!{sheetRange}{sheetIndex}";
+            var imageUrlRange = $"{sheet}!{urlRange}{sheetIndex}";
+            
 
-            var objectList1 = result.ToList();
-            valueRange.Values = new List<IList<object>> { objectList1 };
+            List<object> bankrollList = new List<object>();
+            List<object> imageUrlList = new List<object>();
 
-            var appendRequest1 = service.Spreadsheets.Values.Append(valueRange, spreadsheetId, range);
+            bankrollList.Add(result[0]);
+            imageUrlList.Add(result[1]);
 
-            appendRequest1.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
+            var objectList1 = bankrollList.ToList();
+            var objectList2 = imageUrlList.ToList();
 
-            appendRequest1.Execute();
+            var bankrollValueRange = new ValueRange();
+            bankrollValueRange.Values = new List<IList<object>> { objectList1};
+            var appendRequestBankroll = service.Spreadsheets.Values.Append(bankrollValueRange, spreadsheetId, imageBankrollRange);
+
+            var imageUrlValueRange = new ValueRange();
+            imageUrlValueRange.Values = new List<IList<object>> { objectList2 };
+            var appendImageUrlRange = service.Spreadsheets.Values.Append(imageUrlValueRange, spreadsheetId, imageUrlRange);
+
+            appendRequestBankroll.ValueInputOption = AppendRequest.ValueInputOptionEnum.USERENTERED;
+            appendImageUrlRange.ValueInputOption = AppendRequest.ValueInputOptionEnum.USERENTERED;
+
+            appendRequestBankroll.Execute();
+            appendImageUrlRange.Execute();
         }
     }
 }
