@@ -4,6 +4,9 @@ using Google.Apis.Sheets.v4.Data;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
+using System.Windows.Markup;
 using static Google.Apis.Sheets.v4.SpreadsheetsResource.ValuesResource;
 
 namespace Automator.Entities
@@ -66,34 +69,63 @@ namespace Automator.Entities
             }
             return 0;
         }
-        public static void CreateEntry(List<object> result, int sheetIndex, string sheetRange, string urlRange)
+
+        public static List<object> GetLatestValuesFromSheet(DateOnly date, string sheetRange)
+        {
+            List<object> responseList = new List<object>();
+            int sheetIndex = GetValuesFromSheet(date);
+            string range = $"{sheet}!{sheetRange}{sheetIndex - 1}";
+            GetRequest request = service.Spreadsheets.Values.Get(spreadsheetId, range);
+            ValueRange response = request.Execute();
+
+            while (response.Values == null)
+            {
+                range = $"{sheet}!{sheetRange}{sheetIndex - 1}";
+                request = service.Spreadsheets.Values.Get(spreadsheetId, range);
+                response = request.Execute();
+                sheetIndex -= 1;
+            }
+            responseList.Add(response.Values[0][0]);
+            return responseList;
+        }
+
+        public static void CreateEntry(List<object> result, int sheetIndex, string sheetRange, string urlRange, List<object> latestValues, string latestBankrollSheetRange)
         {
             var imageBankrollRange = $"{sheet}!{sheetRange}{sheetIndex}";
+            var latestBankrollRange = $"{sheet}!{latestBankrollSheetRange}{sheetIndex}";
             var imageUrlRange = $"{sheet}!{urlRange}{sheetIndex}";
-            
 
             List<object> bankrollList = new List<object>();
             List<object> imageUrlList = new List<object>();
+            List<object> latestBankroll = new List<object>();
 
             bankrollList.Add(result[0]);
             imageUrlList.Add(result[1]);
+            latestBankroll.Add(latestValues[0]);
 
             var objectList1 = bankrollList.ToList();
             var objectList2 = imageUrlList.ToList();
 
             var bankrollValueRange = new ValueRange();
-            bankrollValueRange.Values = new List<IList<object>> { objectList1};
+            bankrollValueRange.Values = new List<IList<object>> { objectList1 };
             var appendRequestBankroll = service.Spreadsheets.Values.Append(bankrollValueRange, spreadsheetId, imageBankrollRange);
 
             var imageUrlValueRange = new ValueRange();
             imageUrlValueRange.Values = new List<IList<object>> { objectList2 };
             var appendImageUrlRange = service.Spreadsheets.Values.Append(imageUrlValueRange, spreadsheetId, imageUrlRange);
 
+
+            var latestBankrollValueRange = new ValueRange();
+            latestBankrollValueRange.Values = new List<IList<object>> { latestValues };
+            var appendLatestBankrollValueRange = service.Spreadsheets.Values.Append(latestBankrollValueRange, spreadsheetId, latestBankrollRange);
+
             appendRequestBankroll.ValueInputOption = AppendRequest.ValueInputOptionEnum.USERENTERED;
             appendImageUrlRange.ValueInputOption = AppendRequest.ValueInputOptionEnum.USERENTERED;
+            appendLatestBankrollValueRange.ValueInputOption = AppendRequest.ValueInputOptionEnum.USERENTERED;
 
             appendRequestBankroll.Execute();
             appendImageUrlRange.Execute();
+            appendLatestBankrollValueRange.Execute();
         }
     }
 }

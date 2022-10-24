@@ -54,21 +54,21 @@ namespace ScraperDownload.Entities
                 }
             }
         }
-        public List<object> FilterText(string text, string imageURL)
+        public List<object> FilterText(string text, string imageURL, string pokerRoom)
         {
             string result;
             string line;
-            var matchesValue = new Regex(@"(\$((\d*)[.,]*(\d*)[.,]*(\d*)))");
+            var matchesValueWithDollarSign = new Regex(@"(\$((\d*)[.,]*(\d*)[.,]*(\d*)))");
             var resultList = new List<object>();
 
             using(var sr = new StringReader(text))
             {
                 while ((line = sr.ReadLine()) != null)
                 {
-                    var value = matchesValue.Match(line);   
-                    if (value.Success)
+                    var valueDollarSign = matchesValueWithDollarSign.Match(line);
+                    if (valueDollarSign.Success)
                     {
-                        result = value.Groups[0].Value;
+                        result = valueDollarSign.Groups[0].Value;
                         result = result.Replace("$", "");
                         result = result.Replace(",", "");
                         result = result.Replace(".", ",");
@@ -76,7 +76,7 @@ namespace ScraperDownload.Entities
                     }
                 }
             }
-            resultList.Add(imageURL);
+            resultList.Add(@$"=HIPERLINK(" +'"'+ imageURL +'"' + ";" + '"' + pokerRoom + '"' + ")");
             return resultList;
         }
     }

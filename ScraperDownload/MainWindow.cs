@@ -13,10 +13,13 @@ namespace ScraperDownload
             InitializeComponent();
         }
 
-        private const string POKERSTARS_SCREENSHOT_BANKROLL_SHEET_RANGE = "B";
-        private const string POKERSTARS_SCREENSHOT_URL_SHEET_RANGE = "C";
-        private const string BODOG_SCREENSHOT_BANKROLL_SHEET_RANGE = "D";
-        private const string BODOG_SCREENSHOT_URL_SHEET_RANGE = "E";
+        private const string POKERSTARS_SCREENSHOT_BANKROLL_SHEET_RANGE = "C";
+        private const string POKERSTARS_SCREENSHOT_URL_SHEET_RANGE = "D";
+        private const string POKERSTARS_LATEST_BANKROLL_SHEET_RANGE = "B";
+        private const string BODOG_SCREENSHOT_BANKROLL_SHEET_RANGE = "F";
+        private const string BODOG_LATEST_BANKROLL_SHEET_RANGE = "E";
+        private const string BODOG_SCREENSHOT_URL_SHEET_RANGE = "G";
+
         HttpDownloader httpDownloader;
         private void btn_PokerStarsDownload_Click(object sender, EventArgs e)
         {
@@ -48,9 +51,11 @@ namespace ScraperDownload
             string tessDataPath = @"C:\Program Files\Tesseract-OCR\tessdata";
             string tessDataLanguage = "eng";
             int index = SheetConnector.GetValuesFromSheet(DateOnly.FromDateTime(DatePicker.Value));
+            
 
             if (Directory.Exists(Path.Combine(Directory.GetCurrentDirectory() + "\\PokerstarsScreenShot")))
             {
+                var latestValue = SheetConnector.GetLatestValuesFromSheet(DateOnly.FromDateTime(DatePicker.Value), POKERSTARS_SCREENSHOT_BANKROLL_SHEET_RANGE);
                 string pokerStarsImagePath = Directory.GetCurrentDirectory() + "\\PokerstarsScreenShot";
                 ReadImage readImage = new ReadImage(new TesseractEngine(tessDataPath, tessDataLanguage, EngineMode.Default));
                 if(rB_PokerStarsScreenshotBGColorDark.Checked == true)
@@ -61,13 +66,14 @@ namespace ScraperDownload
                 {
                     pokerStarsResult = readImage.ReadImageFromUser(pokerStarsImagePath, "pokerstars" + ".png", false);
                 }
-                var pokerstarsFiltetedText = readImage.FilterText(pokerStarsResult, txtB_PokerStarsScreenShot.Text);
-                SheetConnector.CreateEntry(pokerstarsFiltetedText, index, POKERSTARS_SCREENSHOT_BANKROLL_SHEET_RANGE, POKERSTARS_SCREENSHOT_URL_SHEET_RANGE);
+                var pokerstarsFiltetedText = readImage.FilterText(pokerStarsResult, txtB_PokerStarsScreenShot.Text, "Stars");
+                SheetConnector.CreateEntry(pokerstarsFiltetedText, index, POKERSTARS_SCREENSHOT_BANKROLL_SHEET_RANGE, POKERSTARS_SCREENSHOT_URL_SHEET_RANGE, latestValue, POKERSTARS_LATEST_BANKROLL_SHEET_RANGE);
                 
 
             }
             if (Directory.Exists(Path.Combine(Directory.GetCurrentDirectory() + "\\BodogScreenShot")))
             {
+                var latestValue = SheetConnector.GetLatestValuesFromSheet(DateOnly.FromDateTime(DatePicker.Value), BODOG_SCREENSHOT_BANKROLL_SHEET_RANGE);
                 string bodogImagePath = Directory.GetCurrentDirectory() + "\\BodogScreenShot";
                 ReadImage readImage = new ReadImage(new TesseractEngine(tessDataPath, tessDataLanguage, EngineMode.Default));
                 if(rB_BodogScreenShotBGColorDark.Checked == true)
@@ -78,8 +84,8 @@ namespace ScraperDownload
                 {
                     bodogResult = readImage.ReadImageFromUser(bodogImagePath, "bodog" + ".png", false);
                 }
-                var bodogFiltetedText = readImage.FilterText(bodogResult, txtB_BodogScreenShot.Text);
-                SheetConnector.CreateEntry(bodogFiltetedText, index, BODOG_SCREENSHOT_BANKROLL_SHEET_RANGE, BODOG_SCREENSHOT_URL_SHEET_RANGE);
+                var bodogFiltetedText = readImage.FilterText(bodogResult, txtB_BodogScreenShot.Text, "Bodog");
+                SheetConnector.CreateEntry(bodogFiltetedText, index, BODOG_SCREENSHOT_BANKROLL_SHEET_RANGE, BODOG_SCREENSHOT_URL_SHEET_RANGE, latestValue, BODOG_LATEST_BANKROLL_SHEET_RANGE);
 
             }
 
