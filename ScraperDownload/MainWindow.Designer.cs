@@ -43,8 +43,15 @@
             this.rB_BodogScreenshotBGColorWhite = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btn_DownloadGraphInfo = new System.Windows.Forms.Button();
+            this.lbl_Graph = new System.Windows.Forms.Label();
+            this.txtB_Graph = new System.Windows.Forms.TextBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.rB_GraphDark = new System.Windows.Forms.RadioButton();
+            this.rB_GraphWhite = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtB_PokerStarsScreenShot
@@ -78,7 +85,7 @@
             // btn_GetInfo
             // 
             this.btn_GetInfo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_GetInfo.Location = new System.Drawing.Point(474, 193);
+            this.btn_GetInfo.Location = new System.Drawing.Point(488, 300);
             this.btn_GetInfo.Name = "btn_GetInfo";
             this.btn_GetInfo.Size = new System.Drawing.Size(87, 37);
             this.btn_GetInfo.TabIndex = 5;
@@ -185,11 +192,72 @@
             this.panel2.Size = new System.Drawing.Size(162, 23);
             this.panel2.TabIndex = 15;
             // 
+            // btn_DownloadGraphInfo
+            // 
+            this.btn_DownloadGraphInfo.Location = new System.Drawing.Point(714, 194);
+            this.btn_DownloadGraphInfo.Name = "btn_DownloadGraphInfo";
+            this.btn_DownloadGraphInfo.Size = new System.Drawing.Size(90, 23);
+            this.btn_DownloadGraphInfo.TabIndex = 16;
+            this.btn_DownloadGraphInfo.Text = "Get Info";
+            this.btn_DownloadGraphInfo.UseVisualStyleBackColor = true;
+            this.btn_DownloadGraphInfo.Click += new System.EventHandler(this.btn_DownloadGraphInfo_Click);
+            // 
+            // lbl_Graph
+            // 
+            this.lbl_Graph.AutoSize = true;
+            this.lbl_Graph.Location = new System.Drawing.Point(299, 198);
+            this.lbl_Graph.Name = "lbl_Graph";
+            this.lbl_Graph.Size = new System.Drawing.Size(42, 15);
+            this.lbl_Graph.TabIndex = 17;
+            this.lbl_Graph.Text = "Graph:";
+            // 
+            // txtB_Graph
+            // 
+            this.txtB_Graph.Location = new System.Drawing.Point(347, 195);
+            this.txtB_Graph.Name = "txtB_Graph";
+            this.txtB_Graph.Size = new System.Drawing.Size(361, 23);
+            this.txtB_Graph.TabIndex = 18;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.rB_GraphDark);
+            this.panel3.Controls.Add(this.rB_GraphWhite);
+            this.panel3.Location = new System.Drawing.Point(347, 224);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(162, 23);
+            this.panel3.TabIndex = 16;
+            // 
+            // rB_GraphDark
+            // 
+            this.rB_GraphDark.AutoSize = true;
+            this.rB_GraphDark.Location = new System.Drawing.Point(0, 1);
+            this.rB_GraphDark.Name = "rB_GraphDark";
+            this.rB_GraphDark.Size = new System.Drawing.Size(49, 19);
+            this.rB_GraphDark.TabIndex = 12;
+            this.rB_GraphDark.TabStop = true;
+            this.rB_GraphDark.Text = "Dark";
+            this.rB_GraphDark.UseVisualStyleBackColor = true;
+            // 
+            // rB_GraphWhite
+            // 
+            this.rB_GraphWhite.AutoSize = true;
+            this.rB_GraphWhite.Location = new System.Drawing.Point(55, 1);
+            this.rB_GraphWhite.Name = "rB_GraphWhite";
+            this.rB_GraphWhite.Size = new System.Drawing.Size(56, 19);
+            this.rB_GraphWhite.TabIndex = 13;
+            this.rB_GraphWhite.TabStop = true;
+            this.rB_GraphWhite.Text = "White";
+            this.rB_GraphWhite.UseVisualStyleBackColor = true;
+            // 
             // Frm_Downloader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 378);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.txtB_Graph);
+            this.Controls.Add(this.lbl_Graph);
+            this.Controls.Add(this.btn_DownloadGraphInfo);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_BodogDownload);
@@ -208,6 +276,8 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -229,5 +299,11 @@
         private RadioButton rB_BodogScreenshotBGColorWhite;
         private Panel panel1;
         private Panel panel2;
+        private Button btn_DownloadGraphInfo;
+        private Label lbl_Graph;
+        private TextBox txtB_Graph;
+        private Panel panel3;
+        private RadioButton rB_GraphDark;
+        private RadioButton rB_GraphWhite;
     }
 }

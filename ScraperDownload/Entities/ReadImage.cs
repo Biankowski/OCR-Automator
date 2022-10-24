@@ -79,6 +79,15 @@ namespace ScraperDownload.Entities
             resultList.Add(@$"=HIPERLINK(" +'"'+ imageURL +'"' + ";" + '"' + pokerRoom + '"' + ")");
             return resultList;
         }
+
+        public List<object> GetGraphInfo(string graphUrl)
+        {
+            var graphList = new List<object>();
+            string hyperLink = "Graph";
+
+            graphList.Add(@$"=HIPERLINK(" + '"' + graphUrl + '"' + ";" + '"' + hyperLink + '"' + ")");
+            return graphList;
+        }
     }
 }
 

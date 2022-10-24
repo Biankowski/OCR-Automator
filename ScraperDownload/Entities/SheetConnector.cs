@@ -94,17 +94,21 @@ namespace Automator.Entities
             var imageBankrollRange = $"{sheet}!{sheetRange}{sheetIndex}";
             var latestBankrollRange = $"{sheet}!{latestBankrollSheetRange}{sheetIndex}";
             var imageUrlRange = $"{sheet}!{urlRange}{sheetIndex}";
+            
 
             List<object> bankrollList = new List<object>();
             List<object> imageUrlList = new List<object>();
             List<object> latestBankroll = new List<object>();
+            
 
             bankrollList.Add(result[0]);
             imageUrlList.Add(result[1]);
             latestBankroll.Add(latestValues[0]);
+            
 
             var objectList1 = bankrollList.ToList();
             var objectList2 = imageUrlList.ToList();
+            
 
             var bankrollValueRange = new ValueRange();
             bankrollValueRange.Values = new List<IList<object>> { objectList1 };
@@ -119,13 +123,35 @@ namespace Automator.Entities
             latestBankrollValueRange.Values = new List<IList<object>> { latestValues };
             var appendLatestBankrollValueRange = service.Spreadsheets.Values.Append(latestBankrollValueRange, spreadsheetId, latestBankrollRange);
 
+            
+
             appendRequestBankroll.ValueInputOption = AppendRequest.ValueInputOptionEnum.USERENTERED;
             appendImageUrlRange.ValueInputOption = AppendRequest.ValueInputOptionEnum.USERENTERED;
             appendLatestBankrollValueRange.ValueInputOption = AppendRequest.ValueInputOptionEnum.USERENTERED;
+           
 
             appendRequestBankroll.Execute();
             appendImageUrlRange.Execute();
             appendLatestBankrollValueRange.Execute();
+            
+        }
+
+        public static void CreateEntry(List<object> graphUrl, string graphSheetRange, int sheetIndex)
+        {
+            var graphUrlRange = $"{sheet}!{graphSheetRange}{sheetIndex}";
+
+            List<object> graphList = new List<object>();
+            graphList.Add(graphUrl[0]);
+
+            var objectList3 = graphList.ToList();
+
+            var graphUrlValueRange = new ValueRange();
+            graphUrlValueRange.Values = new List<IList<object>> { objectList3 };
+            var appendGraphUrl = service.Spreadsheets.Values.Append(graphUrlValueRange, spreadsheetId, graphUrlRange);
+
+            appendGraphUrl.ValueInputOption = AppendRequest.ValueInputOptionEnum.USERENTERED;
+            appendGraphUrl.Execute();
+
         }
     }
 }
